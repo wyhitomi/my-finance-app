@@ -21,6 +21,7 @@ flowchart TB
     banks[("Bancos<br/>Open Finance Brasil")]
     mail["Provedor de e-mail<br/>(a definir, RFC-0003)"]
     bcb["Banco Central do Brasil<br/>cotações PTAX (RFC-0006)"]
+    crypto["Fonte de preços de cripto<br/>(a validar, RFC-0007)"]
 
     user -->|"usa no navegador<br/>pt-BR / en-US<br/>envia extratos OFX/CSV"| app
     app <-->|autenticação| idp
@@ -28,11 +29,12 @@ flowchart TB
     agg <-->|consentimento e dados| banks
     app -.->|"verificação de e-mail,<br/>troca de senha"| mail
     app -->|cotações diárias| bcb
+    app -.->|preços diários| crypto
 
     classDef system fill:#ede9fe,stroke:#6d28d9,color:#2e1065
     classDef external fill:#fff7ed,stroke:#c2410c,color:#431407
     class app system
-    class idp,agg,banks,mail,bcb external
+    class idp,agg,banks,mail,bcb,crypto external
 ```
 
 ## 2. Containers
@@ -88,7 +90,8 @@ flowchart TB
         budgeting["<b>budgeting</b><br/>orçamentos"]
         reporting["<b>reporting</b><br/>consolidado · previsão"]
         banking["<b>banking_integration</b><br/>camada anticorrupção<br/>importação OFX/CSV (RFC-0005)<br/>Open Finance (adiado)"]
-        exchange["<b>exchange</b><br/>cotações PTAX<br/>conversão entre moedas"]
+        exchange["<b>exchange</b><br/>cotações PTAX e cripto<br/>conversão entre moedas"]
+        investments["<b>investments</b><br/>cripto e stablecoins<br/>posições (RFC-0007)"]
     end
 
     kernel["<b>shared_kernel</b><br/>Money · Currency · IDs · eventos"]
@@ -102,12 +105,14 @@ flowchart TB
     budgeting -.->|"BudgetChanged"| reporting
     reporting -->|converte para moeda de referência| exchange
     ledger -->|cotação de referência p/ spread| exchange
+    investments -->|preço dos ativos| exchange
+    reporting -->|patrimônio em cripto| investments
 
     ctx --> kernel
 
     classDef core fill:#ede9fe,stroke:#6d28d9,color:#2e1065
     classDef support fill:#f3f4f6,stroke:#6b7280,color:#111827
-    class accounts,ledger,budgeting,reporting core
+    class accounts,ledger,budgeting,reporting,investments core
     class identity,banking,exchange,kernel support
 ```
 
