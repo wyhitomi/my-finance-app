@@ -36,5 +36,7 @@ Ordem sugerida = ordem de dependência. Decisão de 2026-09-23: **importação d
 | #30 | Cotações PTAX e conversão entre moedas (novo contexto `exchange`) | exchange | #2, #29 | ADR-0016, RFC-0006 |
 | #31 | Lançamentos com câmbio: valor original e cobrado, spread, IOF e tarifas | ledger | #11, #30 | ADR-0016, RFC-0006 |
 | #32 ⏸ | Relatório de custo do câmbio | reporting | #31, #15 | RFC-0006 |
+| #36 | Cripto e stablecoins no patrimônio (novo contexto `investments`), pós-núcleo | investments | #29, #30, #37 | RFC-0007 |
+| #37 | Cotações de criptoativos (fonte gratuita, a validar) | exchange | #30 | RFC-0007 |
 
 ⏸ = adiado.
