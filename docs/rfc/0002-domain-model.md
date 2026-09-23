@@ -71,4 +71,4 @@ detalhado nas propostas OpenSpec correspondentes.
 
 ## Fora de escopo
 
-Importação de extratos OFX/CSV (feature futura, reaproveita a conciliação da RFC-0004) e investimentos com cotação. Open Finance saiu do fora de escopo e é tratado na [RFC-0004](0004-open-finance.md).
+Importação de extratos OFX/CSV (tratada na [RFC-0005](0005-statement-file-import.md)) e investimentos com cotação. Open Finance saiu do fora de escopo e é tratado na [RFC-0004](0004-open-finance.md).

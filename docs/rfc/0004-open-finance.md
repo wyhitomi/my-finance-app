@@ -92,7 +92,7 @@ trocar de agregador afeta só esse contexto.
 | Opção | Por que não |
 |---|---|
 | Tornar-se participante direto do Open Finance | Exige autorização do Banco Central como instituição. Inviável para um app pessoal. |
-| Importar extratos OFX/CSV | Continua útil como **complemento** para bancos sem Open Finance. Fica como feature futura, e reaproveita a mesma conciliação. |
+| Importar extratos OFX/CSV | Continua útil como **complemento** para bancos sem Open Finance. Tratado na [RFC-0005](0005-statement-file-import.md), reaproveitando a mesma conciliação. |
 | Raspagem de internet banking (screen scraping) | Insegura, frágil e contrária aos termos dos bancos. Descartada. |
 
 ## Perguntas em aberto
