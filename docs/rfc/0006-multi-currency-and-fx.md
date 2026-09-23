@@ -135,9 +135,9 @@ trocada sem afetar `ledger` e `reporting`.
 ## Perguntas em aberto
 
 - [ ] Fonte de cotações: PTAX como principal (recomendado) e BCE como complemento?
-- [ ] Cotação de referência para o spread: **PTAX venda** do dia da compra (recomendado), ou do dia do fechamento/pagamento da fatura?
-- [ ] Quais moedas você usa hoje, além do BRL? Isso define os testes prioritários.
-- [ ] O relatório de custo do câmbio entra na primeira versão ou depois?
+- [ ] Cotação de referência para o spread: **PTAX venda** do dia da compra (recomendado), ou do dia do fechamento/pagamento da fatura? *Padrão provisório: dia da compra, aguardando confirmação do dono do produto.*
+- [x] Moedas em uso: **BRL, USD e EUR** (2026-09-23). São os casos de teste prioritários. As demais moedas ISO 4217 continuam suportadas.
+- [x] Relatório de custo do câmbio: **depois da primeira versão** (2026-09-23). Issue #32 com label `adiado`. Os dados (`FxDetails`) continuam sendo registrados desde o início, então o relatório pode ser feito depois sem migração.
 
 ## Fora de escopo
 
