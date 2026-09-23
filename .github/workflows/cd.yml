@@ -49,7 +49,7 @@ jobs:
           images: ghcr.io/${{ github.repository }}-${{ matrix.app }}
           tags: |
             type=sha,enable=${{ inputs.version == '' }}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=${{ inputs.version == '' && github.ref == 'refs/heads/main' }}
             type=semver,pattern={{version}},value=${{ inputs.version }},enable=${{ inputs.version != '' }}
             type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }},enable=${{ inputs.version != '' }}
       - uses: docker/build-push-action@v7
@@ -59,4 +59,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha,scope=${{ matrix.app }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.app }}
+          # The cache is only an optimisation: the push-to-main CD run and the release build
+          # of the same app can export at the same time and collide ("failed to reserve
+          # cache"), which must not fail an image that was already pushed.
+          cache-to: type=gha,mode=max,scope=${{ matrix.app }},ignore-error=true
