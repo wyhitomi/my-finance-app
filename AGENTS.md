@@ -4,8 +4,8 @@ Instruções para qualquer agente de IA (Claude Code, GitHub Copilot, Codex, Cur
 
 ## Produto
 
-Gestor financeiro pessoal: múltiplas contas PF/PJ, cartões de crédito, lançamentos
-manuais, orçamentos, relatórios (consolidado e previsão), i18n pt-BR/en-US, login
+Gestor financeiro pessoal: múltiplas contas PF/PJ (manuais ou via Open Finance), cartões de crédito,
+lançamentos manuais e importados, orçamentos, relatórios (consolidado e previsão), i18n pt-BR/en-US, login
 seguro (senha, social, MFA). Detalhes: `openspec/config.yaml` e `docs/`.
 
 ## Regras obrigatórias

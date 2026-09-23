@@ -1,7 +1,7 @@
 # My Finance App
 
-Gestor financeiro pessoal para quem tem vida financeira **PF e PJ**: múltiplas contas,
-cartões de crédito, lançamentos manuais, orçamentos e relatórios (consolidado e previsão),
+Gestor financeiro pessoal para quem tem vida financeira **PF e PJ**: múltiplas contas
+(manuais ou conectadas via **Open Finance**), cartões de crédito, lançamentos manuais e importados, orçamentos e relatórios (consolidado e previsão),
 com login seguro (senha, Google/Microsoft/GitHub, MFA) em **pt-BR** e **en-US**.
 
 > Status: scaffold. As features estão planejadas como issues e serão especificadas via OpenSpec.

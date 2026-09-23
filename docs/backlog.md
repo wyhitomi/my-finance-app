@@ -11,10 +11,10 @@ Ordem sugerida = ordem de dependência.
 | #5 | Login social: Google, Microsoft, GitHub (OIDC + PKCE) | identity | #3 | ADR-0006, RFC-0003 |
 | #6 | Web: telas de login/cadastro/MFA, sessão em memória, cliente da API gerado do OpenAPI | web | #3 | ADR-0003, ADR-0008 |
 | #7 | Titulares PF (CPF) e PJ (CNPJ) com validação de documento | accounts | #3 | RFC-0002 |
-| #8 | Contas (corrente, poupança, investimento, carteira) por titular, saldo inicial | accounts | #7 | RFC-0002, ADR-0007 |
-| #9 | Cartões de crédito: limite, fechamento, vencimento, faturas e pagamento a partir de conta | accounts | #8 | RFC-0002 |
+| #8 | Contas (corrente, poupança, investimento, carteira) por titular, saldo inicial, origem manual/Open Finance | accounts | #7 | RFC-0002, ADR-0007 |
+| #9 | Cartões de crédito: limite, fechamento, vencimento, faturas e pagamento a partir de conta, origem manual/Open Finance | accounts | #8 | RFC-0002 |
 | #10 | Categorias padrão (traduzidas por chave) e personalizadas, hierárquicas | ledger | #7 | ADR-0008 |
-| #11 | Lançamentos manuais: receita, despesa, transferência entre contas (inclusive PF↔PJ) | ledger | #8, #10 | ADR-0007 |
+| #11 | Lançamentos manuais: receita, despesa, transferência entre contas (inclusive PF↔PJ), campo de origem | ledger | #8, #10 | ADR-0007 |
 | #12 | Compras parceladas no cartão distribuídas em faturas | ledger | #9, #11 | RFC-0002 |
 | #13 | Lançamentos recorrentes (salário, aluguel, assinaturas) | ledger | #11 | RFC-0002 (pergunta em aberto) |
 | #14 | Orçamentos por categoria e período, com acompanhamento realizado × planejado | budgeting | #10, #11 | RFC-0002 |
@@ -23,3 +23,8 @@ Ordem sugerida = ordem de dependência.
 | #17 | E2E com Playwright para fluxos críticos no CI | qualidade | #6 | ADR-0009 |
 | #18 | ADR de hospedagem + deploy automatizado no CD | plataforma | — | ADR-0010 |
 | #19 | RFC: agente de IA do produto (assistente financeiro via tools sobre a API) | reporting | #15 | ADR-0011 |
+| #20 | Escolher agregador Open Finance (Pluggy, Belvo...) e registrar ADR | banking_integration | — | RFC-0004 |
+| #21 | Conectar instituição: widget do agregador, consentimento, `BankConnection`, webhooks assinados | banking_integration | #20, #8 | ADR-0013, RFC-0004 |
+| #22 | Sincronizar contas e cartões conectados (saldo, limite, faturas, parcelas) | banking_integration | #21, #9 | ADR-0013, RFC-0004 |
+| #23 | Importar transações (idempotente por `external_id`) e conciliar com lançamentos manuais | banking_integration / ledger | #22, #11 | ADR-0013, RFC-0004 |
+| #24 | Consentimento: aviso de expiração, renovação, desconexão e exclusão de dados (LGPD) | banking_integration | #21 | RFC-0004 |

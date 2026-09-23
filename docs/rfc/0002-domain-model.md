@@ -17,10 +17,12 @@ detalhado nas propostas OpenSpec correspondentes.
 |---|---|---|
 | Usuário | `User` | Pessoa que faz login. Dona de um ou mais titulares. |
 | Titular | `Holder` | Entidade financeira: **PF** (CPF) ou **PJ** (CNPJ). Um usuário pode ter vários (ex.: ele mesmo + sua empresa). |
-| Conta | `Account` | Conta corrente, poupança, investimento ou carteira (dinheiro) pertencente a um titular. |
-| Cartão de crédito | `CreditCard` | Instrumento com limite, dia de fechamento e dia de vencimento; gera faturas. |
+| Conta | `Account` | Conta corrente, poupança, investimento ou carteira (dinheiro) pertencente a um titular. Origem **manual** ou **Open Finance** (RFC-0004). |
+| Cartão de crédito | `CreditCard` | Instrumento com limite, dia de fechamento e dia de vencimento; gera faturas. Origem manual ou Open Finance. |
 | Fatura | `Statement` | Período de um cartão; paga a partir de uma conta. |
-| Lançamento | `Transaction` | Receita, despesa ou transferência, com data, valor (`Money`), categoria. |
+| Lançamento | `Transaction` | Receita, despesa ou transferência, com data, valor (`Money`), categoria. Origem manual, importada ou recorrente. |
+| Conexão bancária | `BankConnection` | Vínculo com uma instituição via Open Finance: consentimento, validade, status de sincronização. |
+| Conciliação | `Reconciliation` | Associação confirmada entre um lançamento manual e um importado que representam o mesmo fato. |
 | Parcelamento | `Installment` | Despesa no cartão dividida em N faturas. |
 | Categoria | `Category` | Classificação hierárquica de lançamentos. |
 | Orçamento | `Budget` | Limite planejado por categoria e período. |
@@ -43,6 +45,11 @@ detalhado nas propostas OpenSpec correspondentes.
                                         └───────────┘          │(consolid.,│
                                                                │ previsão) │
                                                                └───────────┘
+
+┌─────────────────────┐  comandos/eventos (nosso vocabulário)
+│ banking_integration │ ────────────────► accounts, ledger
+│ (Open Finance, ACL) │ ◄──── webhooks do agregador
+└─────────────────────┘
 ```
 
 | Contexto | Responsabilidade | Tipo |
@@ -51,7 +58,8 @@ detalhado nas propostas OpenSpec correspondentes.
 | `accounts` | Titulares PF/PJ, contas, cartões, faturas | Core |
 | `ledger` | Lançamentos, transferências, parcelas, categorias | Core |
 | `budgeting` | Orçamentos e acompanhamento | Core |
-| `reporting` | Relatórios consolidados e previsão (read models) | Core; primeiro candidato a microsserviço |
+| `reporting` | Relatórios consolidados e previsão (read models) | Core; candidato a microsserviço |
+| `banking_integration` | Conexões Open Finance via agregador, sincronização, webhooks (camada anticorrupção, ADR-0013) | Suporte; primeiro candidato a microsserviço |
 | `shared_kernel` | `Money`, `Currency`, IDs, eventos base | Kernel compartilhado |
 
 ## Perguntas em aberto
@@ -63,4 +71,4 @@ detalhado nas propostas OpenSpec correspondentes.
 
 ## Fora de escopo
 
-Importação de extratos (OFX/CSV), Open Finance, investimentos com cotação.
+Importação de extratos OFX/CSV (feature futura, reaproveita a conciliação da RFC-0004) e investimentos com cotação. Open Finance saiu do fora de escopo e é tratado na [RFC-0004](0004-open-finance.md).

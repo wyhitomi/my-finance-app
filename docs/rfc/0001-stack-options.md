@@ -58,4 +58,4 @@ Escolhida pelo dono do produto em 2026-09-23:
 
 ## Fora de escopo
 
-App mobile nativo, Open Finance / importação bancária automática (candidatos a RFCs futuras).
+App mobile nativo (candidato a RFC futura). Open Finance passou a ser tratado na [RFC-0004](0004-open-finance.md).

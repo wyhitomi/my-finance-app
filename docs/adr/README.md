@@ -16,3 +16,4 @@ Leia os ADRs **antes** de propor ou implementar qualquer mudança. Novo ADR: cop
 | [0010](0010-ci-cd-and-pre-commit.md) | CI/CD com GitHub Actions e pre-commit | Aceito |
 | [0011](0011-spec-driven-development-and-ai-agents.md) | OpenSpec e agentes de IA | Aceito |
 | [0012](0012-monorepo-layout.md) | Monorepo | Aceito |
+| [0013](0013-account-sources-and-banking-integration.md) | Origem das contas (manual/Open Finance) e contexto `banking_integration` | Aceito |
