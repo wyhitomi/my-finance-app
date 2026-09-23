@@ -2,11 +2,12 @@ name: Release
 
 # Opens/updates the release PR from Conventional Commits on main and, when it is merged,
 # tags each app (api-vX.Y.Z / web-vX.Y.Z), creates the GitHub Release and publishes
-# version-tagged images (ADR-0017).
+# version-tagged images (ADR-0017). Runs only when a pull request is merged into main:
+# no direct pushes, no manual dispatch (ADR-0019).
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,6 +20,7 @@ concurrency:
 jobs:
   release-please:
     name: Release PR / tags
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       api_release_created: ${{ steps.release.outputs['apps/api--release_created'] }}
@@ -39,6 +41,7 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ steps.app-token.outputs.token || secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          target-branch: main
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
@@ -53,6 +56,7 @@ jobs:
     with:
       app: api
       version: ${{ needs.release-please.outputs.api_version }}
+      ref: ${{ github.event.pull_request.merge_commit_sha }}
 
   web-image:
     name: Publish web image
@@ -65,3 +69,4 @@ jobs:
     with:
       app: web
       version: ${{ needs.release-please.outputs.web_version }}
+      ref: ${{ github.event.pull_request.merge_commit_sha }}
