@@ -26,12 +26,19 @@ jobs:
       web_release_created: ${{ steps.release.outputs['apps/web--release_created'] }}
       web_version: ${{ steps.release.outputs['apps/web--version'] }}
     steps:
+      # PRs opened with GITHUB_TOKEN do not trigger CI. Token precedence: GitHub App
+      # (RELEASE_PLEASE_APP_ID + RELEASE_PLEASE_APP_PRIVATE_KEY), then the PAT in
+      # RELEASE_PLEASE_TOKEN, then GITHUB_TOKEN. Setup: docs/releases.md.
+      - id: app-token
+        if: vars.RELEASE_PLEASE_APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
       - id: release
         uses: googleapis/release-please-action@v4
         with:
-          # PRs opened with GITHUB_TOKEN do not trigger CI; a PAT or GitHub App token
-          # in RELEASE_PLEASE_TOKEN makes the release PR run the required checks.
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token || secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 

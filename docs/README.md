@@ -5,6 +5,7 @@
 | [`adr/`](adr/README.md) | **Architecture Decision Records** — decisões tomadas, imutáveis após aceitas (substituídas por novos ADRs). |
 | [`rfc/`](rfc/README.md) | **Requests for Comments** — propostas abertas à discussão, antes de virarem decisão (ADR) ou mudança (OpenSpec). |
 | [`architecture/`](architecture/overview.md) | Visão geral da arquitetura e [diagramas](architecture/diagrams.md) (contexto, containers, bounded contexts, fluxos de login e Open Finance). |
+| [`releases.md`](releases.md) | Como as versões e releases são geradas (release-please) e configuração do token. |
 | [`../openspec/`](../openspec) | Especificações vivas (`specs/`) e propostas de mudança (`changes/`). |
 
 ## Fluxo de trabalho

@@ -42,10 +42,9 @@ Vamos usar o **release-please** (`googleapis/release-please-action`) em modo man
 - Mensagens de commit passam a determinar versões e CHANGELOG: o tipo correto (`feat`, `fix`...) importa. Em
   squash merge, o título do PR vira o commit e também deve seguir Conventional Commits.
 - Nunca edite à mão as versões em `pyproject.toml`, `package.json`, os `CHANGELOG.md` nem o manifest.
-- Configuração manual no GitHub: em *Settings → Actions → General*, permitir que o GitHub Actions crie PRs.
-  PRs abertos com o `GITHUB_TOKEN` não disparam o CI; para o PR de release rodar os checks exigidos pela branch
-  protection, cadastre o segredo `RELEASE_PLEASE_TOKEN` (PAT fine-grained ou token de GitHub App com
-  `contents` e `pull-requests` de escrita). Sem ele, o workflow usa o `GITHUB_TOKEN`.
+- PRs abertos com o `GITHUB_TOKEN` não disparam o CI. O workflow usa, nesta ordem, um token de **GitHub App**
+  (`RELEASE_PLEASE_APP_ID` + `RELEASE_PLEASE_APP_PRIVATE_KEY`, recomendado), um **PAT fine-grained**
+  (`RELEASE_PLEASE_TOKEN`) ou o `GITHUB_TOKEN`. Passo a passo em [`docs/releases.md`](../releases.md).
 - O `uv.lock` continua registrando a versão antiga do próprio projeto após o bump; é inofensivo com
   `uv sync --frozen` e se corrige no próximo `uv lock`.
 - `apps/web/CHANGELOG.md` fica fora do Prettier, pois é gerado.
