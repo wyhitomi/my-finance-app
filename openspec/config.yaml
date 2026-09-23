@@ -27,7 +27,11 @@ context: |
   + Alembic. Auth uses short-lived JWT access tokens + rotating refresh tokens.
 
   Money is never a float: Decimal amounts + ISO 4217 currency (Money value object
-  in the shared kernel).
+  in the shared kernel). Multi-currency from day one (ADR-0016): any ISO 4217
+  currency with its own minor units, per-user reporting currency (default BRL),
+  explicit conversion with recorded rate/source/date, and FX details (original vs
+  charged amount, spread vs reference rate, IOF and fees) per RFC-0006. Rates live
+  in the exchange context.
 
   Conventions: Conventional Commits; TDD (red → green → refactor); every change
   must cite the ADRs/RFCs it relies on; new architectural decisions need a new ADR.

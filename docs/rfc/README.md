@@ -9,3 +9,4 @@ Propostas em discussão. Uma RFC aceita gera um ou mais ADRs e/ou mudanças Open
 | [0003](0003-authentication-and-mfa.md) | Autenticação, login social e MFA | Em discussão |
 | [0004](0004-open-finance.md) | Contas manuais e conectadas via Open Finance | Adiada |
 | [0005](0005-statement-file-import.md) | Importação de extratos em OFX e CSV | Em discussão (priorizada) |
+| [0006](0006-multi-currency-and-fx.md) | Múltiplas moedas, câmbio e taxas (spread, IOF) | Em discussão |

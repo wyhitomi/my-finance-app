@@ -19,3 +19,4 @@ Leia os ADRs **antes** de propor ou implementar qualquer mudança. Novo ADR: cop
 | [0013](0013-account-sources-and-banking-integration.md) | Origem das contas (manual/Open Finance) e contexto `banking_integration` | Aceito |
 | [0014](0014-in-house-ofx-parser.md) | Parser próprio para arquivos OFX | Aceito |
 | [0015](0015-statement-import-in-banking-integration.md) | Importação de arquivos de extrato dentro de `banking_integration` | Aceito |
+| [0016](0016-multi-currency-from-day-one.md) | Múltiplas moedas desde a primeira versão | Aceito |

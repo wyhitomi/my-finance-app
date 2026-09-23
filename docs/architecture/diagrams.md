@@ -20,17 +20,19 @@ flowchart TB
     agg["Agregador Open Finance<br/>(adiado, RFC-0004)"]
     banks[("Bancos<br/>Open Finance Brasil")]
     mail["Provedor de e-mail<br/>(a definir, RFC-0003)"]
+    bcb["Banco Central do Brasil<br/>cotações PTAX (RFC-0006)"]
 
     user -->|"usa no navegador<br/>pt-BR / en-US<br/>envia extratos OFX/CSV"| app
     app <-->|autenticação| idp
     app <-.->|"contas e transações<br/>(ADR-0013, adiado)"| agg
     agg <-->|consentimento e dados| banks
     app -.->|"verificação de e-mail,<br/>troca de senha"| mail
+    app -->|cotações diárias| bcb
 
     classDef system fill:#ede9fe,stroke:#6d28d9,color:#2e1065
     classDef external fill:#fff7ed,stroke:#c2410c,color:#431407
     class app system
-    class idp,agg,banks,mail external
+    class idp,agg,banks,mail,bcb external
 ```
 
 ## 2. Containers
@@ -86,6 +88,7 @@ flowchart TB
         budgeting["<b>budgeting</b><br/>orçamentos"]
         reporting["<b>reporting</b><br/>consolidado · previsão"]
         banking["<b>banking_integration</b><br/>camada anticorrupção<br/>importação OFX/CSV (RFC-0005)<br/>Open Finance (adiado)"]
+        exchange["<b>exchange</b><br/>cotações PTAX<br/>conversão entre moedas"]
     end
 
     kernel["<b>shared_kernel</b><br/>Money · Currency · IDs · eventos"]
@@ -97,13 +100,15 @@ flowchart TB
     ledger -.->|"TransactionRecorded"| budgeting
     ledger -.->|"TransactionRecorded"| reporting
     budgeting -.->|"BudgetChanged"| reporting
+    reporting -->|converte para moeda de referência| exchange
+    ledger -->|cotação de referência p/ spread| exchange
 
     ctx --> kernel
 
     classDef core fill:#ede9fe,stroke:#6d28d9,color:#2e1065
     classDef support fill:#f3f4f6,stroke:#6b7280,color:#111827
     class accounts,ledger,budgeting,reporting core
-    class identity,banking,kernel support
+    class identity,banking,exchange,kernel support
 ```
 
 Cada contexto tem as mesmas quatro camadas, e as dependências só apontam para dentro:

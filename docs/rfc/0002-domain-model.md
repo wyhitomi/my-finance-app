@@ -27,6 +27,9 @@ detalhado nas propostas OpenSpec correspondentes.
 | Categoria | `Category` | Classificação hierárquica de lançamentos. |
 | Orçamento | `Budget` | Limite planejado por categoria e período. |
 | Previsão | `Forecast` | Projeção de saldo com base em recorrências, parcelas e orçamentos. |
+| Moeda de referência | `ReportingCurrency` | Moeda em que o usuário vê relatórios consolidados (padrão BRL). |
+| Cotação | `ExchangeRate` | Taxa de conversão entre duas moedas numa data, com fonte (ex.: PTAX). |
+| Detalhes de câmbio | `FxDetails` | Valor original, valor cobrado, taxa efetiva, spread e taxas (IOF, tarifas) de uma operação com câmbio. |
 
 ## Bounded contexts
 
@@ -60,11 +63,12 @@ detalhado nas propostas OpenSpec correspondentes.
 | `budgeting` | Orçamentos e acompanhamento | Core |
 | `reporting` | Relatórios consolidados e previsão (read models) | Core; candidato a microsserviço |
 | `banking_integration` | Entrada de dados bancários externos: importação OFX/CSV (ADR-0015) e, no futuro, Open Finance (ADR-0013). Camada anticorrupção | Suporte; primeiro candidato a microsserviço |
-| `shared_kernel` | `Money`, `Currency`, IDs, eventos base | Kernel compartilhado |
+| `exchange` | Cotações (PTAX), conversão entre moedas (ADR-0016, RFC-0006) | Suporte |
+| `shared_kernel` | `Money`, `Currency` (ISO 4217), `ExchangeRate`, IDs, eventos base | Kernel compartilhado |
 
 ## Perguntas em aberto
 
-- [ ] **Moedas:** só BRL no início, ou multimoeda (ex.: conta em USD) desde já? Afeta relatórios consolidados (conversão de câmbio).
+- [x] **Moedas:** multimoeda **desde o início**, decidido em 2026-09-23 ([ADR-0016](../adr/0016-multi-currency-from-day-one.md)). Câmbio e taxas na [RFC-0006](0006-multi-currency-and-fx.md).
 - [ ] **Compartilhamento:** um titular PJ pode ser acessado por mais de um usuário (ex.: sócio, contador)? Se sim, `accounts` precisa de papéis/permissões.
 - [ ] **Separação PF × PJ nos relatórios:** consolidado único com filtro, ou visões separadas por padrão?
 - [ ] **Recorrências** (salário, aluguel, assinaturas) ficam em `ledger` ou num contexto `scheduling` próprio?
