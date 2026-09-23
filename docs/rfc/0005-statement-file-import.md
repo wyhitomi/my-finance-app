@@ -3,7 +3,7 @@
 - **Status:** Em discussão. Prioridade decidida: **OFX primeiro, antes do Open Finance** (2026-09-23).
 - **Autor(es):** Hitomi Growth + Claude Code
 - **Criada em:** 2026-09-23
-- **ADRs resultantes:** [ADR-0014](../adr/0014-in-house-ofx-parser.md) (parser OFX próprio). Onde a importação fica no código (opção A ou B) ainda será decidido.
+- **ADRs resultantes:** [ADR-0014](../adr/0014-in-house-ofx-parser.md) (parser OFX próprio), [ADR-0015](../adr/0015-statement-import-in-banking-integration.md) (importação dentro de `banking_integration`).
 
 ## Resumo
 
@@ -159,7 +159,7 @@ bancários". A porta `BankingProvider` ganha uma irmã, `StatementFileParser`, e
 ## Perguntas em aberto
 
 - [x] Parser próprio ou `ofxparse`? **Parser próprio**, confirmado em 2026-09-23 ([ADR-0014](../adr/0014-in-house-ofx-parser.md)).
-- [ ] Opção A (dentro de `banking_integration`, recomendada) ou B (contexto próprio)?
+- [x] Opção A ou B? **Opção A**, dentro de `banking_integration`, confirmada em 2026-09-23 ([ADR-0015](../adr/0015-statement-import-in-banking-integration.md)).
 - [x] Priorizar a importação de arquivos antes do Open Finance? **Sim.** Decidido pelo
       dono do produto em 2026-09-23: não haverá contratação de agregador por enquanto.
       Ordem: OFX → CSV → (Open Finance, quando houver orçamento).

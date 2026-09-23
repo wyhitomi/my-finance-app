@@ -59,7 +59,7 @@ detalhado nas propostas OpenSpec correspondentes.
 | `ledger` | Lançamentos, transferências, parcelas, categorias | Core |
 | `budgeting` | Orçamentos e acompanhamento | Core |
 | `reporting` | Relatórios consolidados e previsão (read models) | Core; candidato a microsserviço |
-| `banking_integration` | Conexões Open Finance via agregador, sincronização, webhooks (camada anticorrupção, ADR-0013) | Suporte; primeiro candidato a microsserviço |
+| `banking_integration` | Entrada de dados bancários externos: importação OFX/CSV (ADR-0015) e, no futuro, Open Finance (ADR-0013). Camada anticorrupção | Suporte; primeiro candidato a microsserviço |
 | `shared_kernel` | `Money`, `Currency`, IDs, eventos base | Kernel compartilhado |
 
 ## Perguntas em aberto

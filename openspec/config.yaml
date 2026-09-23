@@ -13,8 +13,9 @@ context: |
   MFA (TOTP), manual income/expense entry, budgets, reports (consolidated and
   forecast), i18n (en-US, pt-BR). Accounts and credit cards are either manual
   or connected via Open Finance Brasil through an authorised aggregator
-  (RFC-0004, ADR-0013); the aggregator is isolated in the banking_integration
-  context (anti-corruption layer). Imported transactions are idempotent by
+  (RFC-0004, ADR-0013; Open Finance is deferred). OFX/CSV statement import comes
+  first (RFC-0005, ADR-0014 in-house OFX parser, ADR-0015). All external bank
+  data enters through the banking_integration context (anti-corruption layer). Imported transactions are idempotent by
   external_id and reconciliation with manual entries is always user-confirmed.
 
   Architecture (see docs/adr): client/server. Backend is a modular monolith in
