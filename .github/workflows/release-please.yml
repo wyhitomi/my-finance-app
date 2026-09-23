@@ -31,7 +31,7 @@ jobs:
       # RELEASE_PLEASE_TOKEN, then GITHUB_TOKEN. Setup: docs/releases.md.
       - id: app-token
         if: vars.RELEASE_PLEASE_APP_ID != ''
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.RELEASE_PLEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
