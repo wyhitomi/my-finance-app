@@ -38,7 +38,9 @@ decimais ISO, soma só na mesma moeda). Então o modelo é separado:
 Asset           id, symbol (ex.: BTC, USDG), name, network (opcional), decimals,
                 kind: crypto | stablecoin, peg: USD (só stablecoin)
 AssetQuantity   asset + Decimal (precisão do ativo)
-Holding         conta/carteira + ativo + quantidade atual
+Wallet          titular, instituição (ex.: OKX) ou endereço público,
+                custody: custodial | self_custody
+Holding         carteira + ativo + rede + quantidade atual
 AssetPrice      ativo, moeda de cotação (USD ou BRL), preço Decimal, data/hora, fonte
 Valuation       quantidade × preço → Money (na moeda da cotação), convertido para a
                 moeda de referência pelo contexto exchange (PTAX, RFC-0006)
@@ -74,7 +76,7 @@ Valuation       quantidade × preço → Money (na moeda da cotação), converti
 - **Valor padrão: 1 unidade = 1 USD**, convertido para reais pela **PTAX** (RFC-0006).
   É a fonte oficial, gratuita e já prevista no app.
 - **Alerta de desvio de paridade:** se o preço de mercado disponível se afastar do
-  dólar além de um limite (ex.: 2%), o app avisa e mostra os dois valores. Stablecoins
+  dólar mais de **2%**, o app avisa e mostra os dois valores. Stablecoins
   podem perder a paridade, e esconder isso seria enganoso.
 
 ### Cotações de cripto
@@ -94,7 +96,7 @@ tarefa da issue de cotações de cripto.
 
 | Parte | Local |
 |---|---|
-| `Asset`, `AssetQuantity`, `Holding`, movimentações | **novo contexto `investments`** (cripto é o primeiro tipo de ativo; ações e FIIs podem vir depois) |
+| `Asset`, `AssetQuantity`, `Wallet`, `Holding`, movimentações | **novo contexto `investments`** (cripto é o primeiro tipo de ativo; ações e FIIs podem vir depois) |
 | `AssetPrice` e o adaptador de cotações de cripto | `exchange` (junto da PTAX) |
 | Patrimônio consolidado com cripto | `reporting` |
 
