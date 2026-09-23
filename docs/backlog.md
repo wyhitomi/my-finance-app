@@ -11,15 +11,15 @@ Ordem sugerida = ordem de dependência. Decisão de 2026-09-23: **importação d
 | #5 | Login social: Google, Microsoft, GitHub (OIDC + PKCE) | identity | #3 | ADR-0006, RFC-0003 |
 | #6 | Web: telas de login/cadastro/MFA, sessão em memória, cliente da API gerado do OpenAPI | web | #3 | ADR-0003, ADR-0008 |
 | #7 | Titulares PF (CPF) e PJ (CNPJ) com validação de documento | accounts | #3 | RFC-0002 |
-| #8 | Contas (corrente, poupança, investimento, carteira) por titular, saldo inicial, origem manual/Open Finance | accounts | #7 | RFC-0002, ADR-0007 |
+| #8 | Contas (corrente, poupança, investimento, carteira) por titular, saldo inicial, qualquer moeda ISO 4217, origem manual/Open Finance | accounts | #7, #29 | RFC-0002, ADR-0007 |
 | #9 | Cartões de crédito: limite, fechamento, vencimento, faturas e pagamento a partir de conta, origem manual/Open Finance | accounts | #8 | RFC-0002 |
 | #10 | Categorias padrão (traduzidas por chave) e personalizadas, hierárquicas | ledger | #7 | ADR-0008 |
 | #11 | Lançamentos manuais: receita, despesa, transferência entre contas (inclusive PF↔PJ), campo de origem | ledger | #8, #10 | ADR-0007 |
 | #12 | Compras parceladas no cartão distribuídas em faturas | ledger | #9, #11 | RFC-0002 |
 | #13 | Lançamentos recorrentes (salário, aluguel, assinaturas) | ledger | #11 | RFC-0002 (pergunta em aberto) |
 | #14 | Orçamentos por categoria e período, com acompanhamento realizado × planejado | budgeting | #10, #11 | RFC-0002 |
-| #15 | Relatório consolidado (PF, PJ e total) por período e categoria | reporting | #11 | RFC-0002 |
-| #16 | Previsão de saldo (recorrências + parcelas + orçamentos) | reporting | #12, #13, #14 | RFC-0002 |
+| #15 | Relatório consolidado (PF, PJ e total) na moeda de referência, com variação cambial | reporting | #11, #30 | RFC-0002 |
+| #16 | Previsão de saldo (recorrências + parcelas + orçamentos), com conversão estimada | reporting | #12, #13, #14, #30 | RFC-0002 |
 | #17 | E2E com Playwright para fluxos críticos no CI | qualidade | #6 | ADR-0009 |
 | #18 | ADR de hospedagem + deploy automatizado no CD | plataforma | — | ADR-0010 |
 | #19 | RFC: agente de IA do produto (assistente financeiro via tools sobre a API) | reporting | #15 | ADR-0011 |
@@ -32,5 +32,9 @@ Ordem sugerida = ordem de dependência. Decisão de 2026-09-23: **importação d
 | #26 | Upload de extrato: prévia, deduplicação, lote e desfazer | banking_integration | #25, #11 | RFC-0005 |
 | #27 | Conciliação de lançamentos importados com manuais | ledger | #11 | RFC-0004, RFC-0005 |
 | #28 | CSV com assistente de mapeamento de colunas e modelos por conta | banking_integration | #26 | RFC-0005 |
+| #29 | Money com todas as moedas ISO 4217 e casas decimais corretas; `ExchangeRate` | shared_kernel | — | ADR-0016, RFC-0006 |
+| #30 | Cotações PTAX e conversão entre moedas (novo contexto `exchange`) | exchange | #2, #29 | ADR-0016, RFC-0006 |
+| #31 | Lançamentos com câmbio: valor original e cobrado, spread, IOF e tarifas | ledger | #11, #30 | ADR-0016, RFC-0006 |
+| #32 | Relatório de custo do câmbio | reporting | #31, #15 | RFC-0006 |
 
 ⏸ = adiado.
