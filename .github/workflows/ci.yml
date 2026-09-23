@@ -28,6 +28,8 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --frozen
+      - name: uv.lock is in sync with pyproject.toml
+        run: uv lock --check
       - run: uv run ruff format --check .
       - run: uv run ruff check --output-format=github .
       - run: uv run mypy

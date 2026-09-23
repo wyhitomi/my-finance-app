@@ -22,7 +22,14 @@
     "apps/api": {
       "release-type": "python",
       "component": "api",
-      "package-name": "finance-api"
+      "package-name": "finance-api",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "uv.lock",
+          "jsonpath": "$.package[?(@.name.value=='finance-api')].version"
+        }
+      ]
     },
     "apps/web": {
       "release-type": "node",
