@@ -1,6 +1,8 @@
 # Releases (release-please)
 
-Decisão e regras: [ADR-0017](adr/0017-release-management-with-release-please.md). API e web têm versões,
+Decisão e regras: [ADR-0017](adr/0017-release-management-with-release-please.md) e
+[ADR-0019](adr/0019-release-only-on-merged-pull-requests.md). O workflow **Release** roda somente quando um PR é
+mergeado na `main`: push direto e disparo manual não o acionam. API e web têm versões,
 tags (`api-vX.Y.Z`, `web-vX.Y.Z`) e CHANGELOGs independentes.
 
 Arquivos de versão que o release-please atualiza no PR de release:
@@ -78,3 +80,7 @@ consegue aprovar o próprio PR de release.
 Após o merge de um `feat:` ou `fix:` na `main`, a aba **Actions → Release** deve abrir o PR
 `chore(main): release ...`, e esse PR deve rodar o workflow **CI**. Se o CI não rodar, o workflow caiu no
 `GITHUB_TOKEN`: confira nomes e valores da variável/segredos.
+
+Para **recriar** um PR de release (por exemplo, depois de mudar o `release-please-config.json`), feche o PR e
+delete a branch `release-please--branches--main`. O próximo merge na `main` abre um PR novo com a configuração
+atual. Um PR de release aberto só é reescrito quando as notas de versão mudam.

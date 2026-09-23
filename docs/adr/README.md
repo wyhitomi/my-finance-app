@@ -22,3 +22,4 @@ Leia os ADRs **antes** de propor ou implementar qualquer mudança. Novo ADR: cop
 | [0016](0016-multi-currency-from-day-one.md) | Múltiplas moedas desde a primeira versão | Aceito |
 | [0017](0017-release-management-with-release-please.md) | Versionamento e releases com release-please | Aceito |
 | [0018](0018-crypto-as-investment-assets.md) | Criptoativos como ativos de investimento, só no patrimônio | Aceito |
+| [0019](0019-release-only-on-merged-pull-requests.md) | Release-please roda somente no merge de PR na `main` | Aceito |
