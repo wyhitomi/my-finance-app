@@ -15,6 +15,7 @@ com login seguro (senha, Google/Microsoft/GitHub, MFA) em **pt-BR** e **en-US**.
 | Dados | PostgreSQL 16 · SQLAlchemy 2 · Alembic | [ADR-0005](docs/adr/0005-persistence-postgresql.md) |
 | Auth | JWT · Argon2id · OAuth2/OIDC · TOTP | [ADR-0006](docs/adr/0006-authentication.md) |
 | Qualidade | TDD · pytest · Vitest · import-linter · pre-commit | [ADR-0009](docs/adr/0009-testing-strategy-tdd.md), [ADR-0010](docs/adr/0010-ci-cd-and-pre-commit.md) |
+| Releases | release-please · SemVer · CHANGELOG por app | [ADR-0017](docs/adr/0017-release-management-with-release-please.md) |
 | IA | OpenSpec · AGENTS.md | [ADR-0011](docs/adr/0011-spec-driven-development-and-ai-agents.md) |
 
 ## Começando
