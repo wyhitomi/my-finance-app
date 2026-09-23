@@ -17,7 +17,7 @@ changes focus on domain behavior.
 - Locale negotiation and localized error envelope in the API; react-i18next in the SPA with pt-BR/en-US and a language switcher (ADR-0008).
 - pytest / Vitest suites with coverage gates (ADR-0009).
 - pre-commit hooks, GitHub Actions CI, CD building images to GHCR, Dependabot (ADR-0010).
-- `docker compose` for local PostgreSQL (ADR-0005); no tables yet.
+- `docker compose` for local PostgreSQL (ADR-0005); no database code yet.
 
 ## Capabilities
 
@@ -33,7 +33,7 @@ _None._
 ## Non-goals
 
 - Any domain feature (auth, accounts, transactions...) — each gets its own change.
-- Database tables/migrations beyond the Alembic skeleton.
+- Database access and migrations (SQLAlchemy/Alembic arrive with the first persisted context).
 - Deploying to a hosting provider (pending a hosting ADR).
 
 ## References

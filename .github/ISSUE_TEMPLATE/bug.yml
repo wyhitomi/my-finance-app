@@ -1,0 +1,17 @@
+name: Bug
+description: Algo não funciona como especificado
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: O que aconteceu e o que era esperado
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+  - type: input
+    id: spec
+    attributes:
+      label: Spec OpenSpec violada (se houver)
