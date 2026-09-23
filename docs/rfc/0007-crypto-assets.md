@@ -1,9 +1,9 @@
 # RFC-0007: Criptoativos e stablecoins no patrimônio
 
-- **Status:** Em discussão
+- **Status:** Aceita (2026-09-23). Prioridade: depois do núcleo.
 - **Autor(es):** Hitomi Growth + Claude Code
 - **Criada em:** 2026-09-23
-- **ADRs resultantes:** a criar, após responder as perguntas em aberto
+- **ADRs resultantes:** [ADR-0018](../adr/0018-crypto-as-investment-assets.md) (modelo de criptoativos). A fonte de preços ficará num ADR próprio, após o spike da issue #37.
 
 ## Resumo
 
@@ -51,8 +51,14 @@ Valuation       quantidade × preço → Money (na moeda da cotação), converti
 
 ### Escopo da primeira versão (só patrimônio)
 
-1. **Carteiras e contas de cripto** do titular (PF ou PJ): corretora ou carteira própria.
-   Cada uma com os ativos e as quantidades.
+1. **Carteiras e contas de cripto** do titular (PF ou PJ), com o **tipo de custódia**:
+   - **Custodial:** a instituição guarda os ativos. Exemplos em uso: plataformas globais
+     como a OKX, corretoras como o Mercado Bitcoin, Coinbase (conta na exchange) e BitGo.
+   - **Autocustódia:** o usuário guarda as chaves. Exemplo em uso: MetaMask. A carteira
+     opera em redes compatíveis com Ethereum (ex.: Ethereum, Polygon, Base), e a **rede**
+     é registrada em cada posição, porque o mesmo token pode existir em várias redes.
+
+   Cada carteira tem os ativos e as quantidades.
 2. **Registro manual das movimentações:** compra, venda, recebimento, envio,
    conversão. A quantidade atual é a soma das movimentações. Também é possível
    informar só o saldo atual, para quem quer começar rápido.
@@ -100,8 +106,11 @@ tarefa da issue de cotações de cripto.
 
 ## Evoluções futuras (fora desta RFC)
 
-- Importação de CSV das corretoras (reaproveitando o assistente da issue #28).
-- Leitura de saldo de carteira própria pelo endereço público (blockchain explorer).
+- Importação de CSV ou leitura por API **somente leitura** das plataformas em uso (OKX,
+  Mercado Bitcoin, Coinbase, BitGo). Disponibilidade e formato de cada uma ainda a
+  verificar. Reaproveita o assistente da issue #28.
+- Leitura de saldo das carteiras de autocustódia (ex.: MetaMask) pelo **endereço
+  público**, via exploradores de blockchain das redes usadas.
 - Preço médio, ganho realizado e relatório de apoio ao IR, se o objetivo mudar.
 - Outros ativos de investimento (ações, FIIs, renda fixa) no mesmo contexto.
 
@@ -117,9 +126,11 @@ tarefa da issue de cotações de cripto.
 
 - [x] Objetivo: **só patrimônio** (2026-09-23).
 - [x] Stablecoins: **sim**, ex.: USDG (2026-09-23).
-- [ ] Onde estão os ativos hoje: quais corretoras e/ou carteiras próprias (e em quais redes)?
-- [ ] Prioridade: depois do núcleo (contas, lançamentos, OFX, orçamentos, relatórios), como recomendado, ou antes?
-- [ ] Limite do alerta de desvio de paridade das stablecoins: 2% está bom?
+- [x] Onde estão os ativos: plataformas globais (OKX), corretoras (Mercado Bitcoin),
+      Coinbase e BitGo (custodial) e MetaMask (autocustódia, redes compatíveis com
+      Ethereum). Decidido em 2026-09-23.
+- [x] Prioridade: **depois do núcleo** (contas, lançamentos, OFX, orçamentos, relatórios).
+- [x] Limite do alerta de desvio de paridade: **2%**.
 
 ## Fora de escopo
 

@@ -21,3 +21,4 @@ Leia os ADRs **antes** de propor ou implementar qualquer mudança. Novo ADR: cop
 | [0015](0015-statement-import-in-banking-integration.md) | Importação de arquivos de extrato dentro de `banking_integration` | Aceito |
 | [0016](0016-multi-currency-from-day-one.md) | Múltiplas moedas desde a primeira versão | Aceito |
 | [0017](0017-release-management-with-release-please.md) | Versionamento e releases com release-please | Aceito |
+| [0018](0018-crypto-as-investment-assets.md) | Criptoativos como ativos de investimento, só no patrimônio | Aceito |
