@@ -54,6 +54,31 @@ formato diferente.
 | `ofxparse` 0.21 | MIT | Sem release desde mai/2021 | Licença compatível, mas parada. É um risco para as particularidades brasileiras. |
 | **Parser próprio** | MIT (nosso) | — | OFX 1.x SGML é simples. Algumas centenas de linhas cobrem o subconjunto necessário (conta, cartão, transações, saldo), e o TDD fica fácil com arquivos reais anonimizados de cada banco. XML 2.x lido com `defusedxml`. **Recomendado.** |
 
+**Teste do `ofxparse` 0.21 (2026-09-23).** Rodamos a biblioteca em Python 3.12 contra 8
+arquivos OFX **sintéticos**, montados a partir de particularidades conhecidas dos bancos
+brasileiros. Não são arquivos reais.
+
+| Caso | Resultado |
+|---|---|
+| SGML 1.x em Windows-1252, datas `[-3:BRT]`, acentos | ✅ OK |
+| Valor com vírgula decimal | ✅ OK |
+| Data sem hora | ✅ OK |
+| Fatura de cartão (`CCSTMTRS`) | ✅ OK |
+| `FITID` repetido no arquivo | ⚠️ Aceita em silêncio (tratamos na nossa camada de qualquer forma) |
+| Cabeçalho diz UTF-8, mas o arquivo está em Latin-1 | ❌ Falha (`UnicodeDecodeError`) |
+| **OFX 2.x (XML) com acento em UTF-8** | ❌ **Falha** (`UnicodeDecodeError`: tenta ler como ASCII) |
+| Tentativa de XXE | ✅ Não resolve a entidade, mas corrompe o texto do campo |
+| **Fuso horário**: compra em 31/01 às 22:00 BRT | ❌ **Devolve 01/02 01:00**, sem fuso. Converte para UTC e descarta a informação, então a transação muda de dia e até de mês, o que afeta orçamentos e relatórios. |
+
+Além disso: último release em mai/2021, classificadores só até Python 3.6, e
+dependências de `beautifulsoup4`, `lxml` e `six`. Os problemas de codificação e de
+fuso podem ser contornados, mas exigem pré-processar o arquivo e reinterpretar as
+datas cruas, o que na prática é reescrever as partes difíceis do parser.
+
+**Recomendação mantida: parser próprio.** O `ofxparse` falha justamente nos pontos que
+mais importam para o domínio: data correta do lançamento, OFX 2.x e codificação. Os 8
+casos acima viram os primeiros testes do parser (TDD).
+
 ### CSV
 
 | Aspecto | Situação |
@@ -138,8 +163,10 @@ bancários". A porta `BankingProvider` ganha uma irmã, `StatementFileParser`, e
 - [x] Priorizar a importação de arquivos antes do Open Finance? **Sim.** Decidido pelo
       dono do produto em 2026-09-23: não haverá contratação de agregador por enquanto.
       Ordem: OFX → CSV → (Open Finance, quando houver orçamento).
-- [ ] Quais bancos você usa hoje (PF e PJ)? Os arquivos de exemplo deles, anonimizados,
-      viram a base dos testes.
+- [x] Bancos em uso: **PF**: Itaú, Nubank, BTG. **PJ**: Itaú, InfinitePay, C6. O dono do
+      produto exportará arquivos de exemplo quando a issue #25 começar. Ainda falta
+      confirmar quais desses oferecem exportação em OFX (conta e cartão). Os que só
+      exportarem CSV entram pela issue #28.
 - [ ] Exportação para CSV também entra no escopo, ou fica para depois?
 
 ## Fora de escopo
