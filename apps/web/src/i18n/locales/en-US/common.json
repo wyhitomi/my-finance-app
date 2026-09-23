@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "My Finances",
+    "tagline": "Your personal and business financial health in one place."
+  },
+  "language": {
+    "label": "Language",
+    "pt-BR": "Português (Brasil)",
+    "en-US": "English (US)"
+  }
+}
