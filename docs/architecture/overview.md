@@ -1,5 +1,7 @@
 # Visão geral da arquitetura
 
+> Diagramas detalhados (C4 e sequências) em [`diagrams.md`](diagrams.md).
+
 ```
                   ┌──────────────────────────┐
   Navegador ────► │ apps/web (React + Vite)  │  SPA estática, i18n pt-BR/en-US
