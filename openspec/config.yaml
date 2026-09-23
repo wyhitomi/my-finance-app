@@ -1,0 +1,61 @@
+schema: spec-driven
+githubCopilot:
+  cloudAgent: false
+
+# Project context — shown to AI agents when creating OpenSpec artifacts.
+context: |
+  Product: personal finance manager ("my-finance-app") to track financial health
+  for one person who holds both personal (pessoa física, CPF) and business
+  (pessoa jurídica, CNPJ) accounts.
+
+  Scope: multiple accounts (PF/PJ), credit cards (statements, closing/due dates,
+  installments), secure login (password + social: Google, Microsoft, GitHub),
+  MFA (TOTP), manual income/expense entry, budgets, reports (consolidated and
+  forecast), i18n (en-US, pt-BR). Accounts and credit cards are either manual
+  or connected via Open Finance Brasil through an authorised aggregator
+  (RFC-0004, ADR-0013; Open Finance is deferred). OFX/CSV statement import comes
+  first (RFC-0005, ADR-0014 in-house OFX parser, ADR-0015). All external bank
+  data enters through the banking_integration context (anti-corruption layer). Imported transactions are idempotent by
+  external_id and reconciliation with manual entries is always user-confirmed.
+
+  Architecture (see docs/adr): client/server. Backend is a modular monolith in
+  FastAPI (Python 3.12) organised by DDD bounded contexts under
+  apps/api/src/finance_api/modules/<context>/{domain,application,infrastructure,api}.
+  Contexts talk only through their public application layer or domain events;
+  boundaries are enforced by import-linter. Frontend is a React + Vite + TypeScript
+  SPA in apps/web using react-i18next and TanStack Query. PostgreSQL + SQLAlchemy 2
+  + Alembic. Auth uses short-lived JWT access tokens + rotating refresh tokens.
+
+  Money is never a float: Decimal amounts + ISO 4217 currency (Money value object
+  in the shared kernel). Multi-currency from day one (ADR-0016): any ISO 4217
+  currency with its own minor units, per-user reporting currency (default BRL),
+  explicit conversion with recorded rate/source/date, and FX details (original vs
+  charged amount, spread vs reference rate, IOF and fees) per RFC-0006. Rates live
+  in the exchange context.
+
+  Conventions: Conventional Commits; TDD (red → green → refactor); every change
+  must cite the ADRs/RFCs it relies on; new architectural decisions need a new ADR.
+
+rules:
+  proposal:
+    - Before writing, read docs/adr and docs/rfc and list the ADRs/RFCs this change depends on in a "References" section.
+    - If the change contradicts an accepted ADR, stop and propose a new ADR (superseding) instead of silently deviating.
+    - Always include a "Non-goals" section.
+  design:
+    - Name the bounded context(s) touched and justify any cross-context dependency.
+    - Describe the test strategy (unit for domain, integration for API/persistence, component tests for UI).
+  specs:
+    - Every requirement needs at least one scenario written as GIVEN/WHEN/THEN; scenarios map 1:1 to automated tests.
+    - User-facing text must be specified for both en-US and pt-BR or reference translation keys.
+  tasks:
+    - Order tasks test-first; each implementation task is preceded by a task that writes the failing test.
+    - Keep tasks small (≤ 2 hours).
+
+operations:
+  apply:
+    guidance:
+      - Never implement without first reading the referenced ADRs/RFCs.
+      - Never write production code without a failing test first; run the full test suite before marking a task done.
+  archive:
+    guidance:
+      - Confirm CI-equivalent checks (make check) pass before archiving.

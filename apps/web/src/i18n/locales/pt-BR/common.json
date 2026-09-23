@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Minhas Finanças",
+    "tagline": "Sua saúde financeira, pessoal e empresarial, em um só lugar."
+  },
+  "language": {
+    "label": "Idioma",
+    "pt-BR": "Português (Brasil)",
+    "en-US": "English (US)"
+  }
+}

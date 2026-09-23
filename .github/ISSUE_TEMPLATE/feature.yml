@@ -1,0 +1,23 @@
+name: Feature
+description: Nova capacidade do produto (vira uma proposta OpenSpec)
+labels: [feature]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema / objetivo
+      description: Que necessidade do usuário isto resolve?
+    validations: { required: true }
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo e critérios de aceite
+  - type: input
+    id: context
+    attributes:
+      label: Bounded context
+      placeholder: identity | accounts | ledger | budgeting | reporting
+  - type: textarea
+    id: refs
+    attributes:
+      label: ADRs / RFCs relacionados
