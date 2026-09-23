@@ -8,6 +8,8 @@ Gestor financeiro pessoal: múltiplas contas PF/PJ (manuais ou via Open Finance)
 lançamentos manuais e importados, orçamentos, relatórios (consolidado e previsão), i18n pt-BR/en-US, login
 seguro (senha, social, MFA). Detalhes: `openspec/config.yaml` e `docs/`.
 
+Guias: [ADRs e RFCs](docs/guides/adr-and-rfc.md) · [OpenSpec](docs/guides/openspec.md).
+
 ## Regras obrigatórias
 
 1. **Leia `docs/adr/` e `docs/rfc/` antes de propor ou implementar.** Cite os ADRs/RFCs usados.

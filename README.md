@@ -33,5 +33,6 @@ make web-dev    # http://localhost:5173
 ## Como contribuir (pessoas e agentes de IA)
 
 1. Leia [`AGENTS.md`](AGENTS.md), os [ADRs](docs/adr/README.md) e as [RFCs](docs/rfc/README.md).
+   Guias: [como usar ADRs e RFCs](docs/guides/adr-and-rfc.md) e [como usar o OpenSpec](docs/guides/openspec.md).
 2. Proponha a mudança com OpenSpec (`/opsx:propose`), revise, depois implemente (`/opsx:apply`) **com testes primeiro**.
 3. `make check` verde, PR com o template preenchido, e `/opsx:archive` ao concluir.
