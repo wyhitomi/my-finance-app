@@ -17,13 +17,13 @@ flowchart TB
     app["<b>My Finance App</b><br/>contas, cartões, lançamentos,<br/>orçamentos e relatórios"]
 
     idp["Google · Microsoft · GitHub<br/>login social (OIDC)"]
-    agg["Agregador Open Finance<br/>(a definir, issue #20)"]
+    agg["Agregador Open Finance<br/>(adiado, RFC-0004)"]
     banks[("Bancos<br/>Open Finance Brasil")]
     mail["Provedor de e-mail<br/>(a definir, RFC-0003)"]
 
-    user -->|"usa no navegador<br/>pt-BR / en-US"| app
+    user -->|"usa no navegador<br/>pt-BR / en-US<br/>envia extratos OFX/CSV"| app
     app <-->|autenticação| idp
-    app <-->|"contas e transações<br/>(ADR-0013)"| agg
+    app <-.->|"contas e transações<br/>(ADR-0013, adiado)"| agg
     agg <-->|consentimento e dados| banks
     app -.->|"verificação de e-mail,<br/>troca de senha"| mail
 
@@ -85,7 +85,7 @@ flowchart TB
         ledger["<b>ledger</b><br/>lançamentos · parcelas<br/>categorias · conciliação<br/>origin: manual | imported | recurring"]
         budgeting["<b>budgeting</b><br/>orçamentos"]
         reporting["<b>reporting</b><br/>consolidado · previsão"]
-        banking["<b>banking_integration</b><br/>camada anticorrupção<br/>conexões · consentimento · sync"]
+        banking["<b>banking_integration</b><br/>camada anticorrupção<br/>importação OFX/CSV (RFC-0005)<br/>Open Finance (adiado)"]
     end
 
     kernel["<b>shared_kernel</b><br/>Money · Currency · IDs · eventos"]

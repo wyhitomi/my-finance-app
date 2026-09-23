@@ -1,6 +1,6 @@
 # RFC-0004: Contas manuais e contas conectadas via Open Finance
 
-- **Status:** Em discussão
+- **Status:** Adiada. Sem orçamento para agregador por enquanto (decisão de 2026-09-23). A importação de arquivos OFX/CSV ([RFC-0005](0005-statement-file-import.md)) vem antes. O modelo de origem do ADR-0013 continua valendo.
 - **Autor(es):** Hitomi Growth + Claude Code
 - **Criada em:** 2026-09-23
 - **ADRs resultantes:** [ADR-0013](../adr/0013-account-sources-and-banking-integration.md) (modelo de origem e contexto de integração). A escolha do agregador ficará num ADR futuro.

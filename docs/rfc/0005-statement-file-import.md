@@ -1,6 +1,6 @@
 # RFC-0005: Importação de extratos em OFX e CSV
 
-- **Status:** Em discussão
+- **Status:** Em discussão. Prioridade decidida: **OFX primeiro, antes do Open Finance** (2026-09-23).
 - **Autor(es):** Hitomi Growth + Claude Code
 - **Criada em:** 2026-09-23
 - **ADRs resultantes:** a criar (ADR-0014, escopo do contexto de importação e escolha do parser OFX)
@@ -135,8 +135,9 @@ bancários". A porta `BankingProvider` ganha uma irmã, `StatementFileParser`, e
 
 - [ ] Parser próprio (recomendado) ou `ofxparse`?
 - [ ] Opção A (dentro de `banking_integration`, recomendada) ou B (contexto próprio)?
-- [ ] Priorizar a importação de arquivos **antes** do Open Finance? Recomendado: entrega
-      automação sem custo e aproveita a conciliação que o Open Finance também usará.
+- [x] Priorizar a importação de arquivos antes do Open Finance? **Sim.** Decidido pelo
+      dono do produto em 2026-09-23: não haverá contratação de agregador por enquanto.
+      Ordem: OFX → CSV → (Open Finance, quando houver orçamento).
 - [ ] Quais bancos você usa hoje (PF e PJ)? Os arquivos de exemplo deles, anonimizados,
       viram a base dos testes.
 - [ ] Exportação para CSV também entra no escopo, ou fica para depois?
