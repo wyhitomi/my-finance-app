@@ -1,0 +1,1 @@
+Follow the repository rules in [AGENTS.md](../AGENTS.md). In short: read `docs/adr` and `docs/rfc` before proposing or implementing; always write a failing test first (TDD); start features with an OpenSpec proposal (`/opsx-propose`) reviewed by a human; money is `Decimal`/`Money`, never float; all UI text needs pt-BR and en-US translation keys.
