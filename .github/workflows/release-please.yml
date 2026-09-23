@@ -1,0 +1,67 @@
+name: Release
+
+# Opens/updates the release PR from Conventional Commits on main and, when it is merged,
+# tags each app (api-vX.Y.Z / web-vX.Y.Z), creates the GitHub Release and publishes
+# version-tagged images (ADR-0017).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    name: Release PR / tags
+    runs-on: ubuntu-latest
+    outputs:
+      api_release_created: ${{ steps.release.outputs['apps/api--release_created'] }}
+      api_version: ${{ steps.release.outputs['apps/api--version'] }}
+      web_release_created: ${{ steps.release.outputs['apps/web--release_created'] }}
+      web_version: ${{ steps.release.outputs['apps/web--version'] }}
+    steps:
+      # PRs opened with GITHUB_TOKEN do not trigger CI. Token precedence: GitHub App
+      # (RELEASE_PLEASE_APP_ID + RELEASE_PLEASE_APP_PRIVATE_KEY), then the PAT in
+      # RELEASE_PLEASE_TOKEN, then GITHUB_TOKEN. Setup: docs/releases.md.
+      - id: app-token
+        if: vars.RELEASE_PLEASE_APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
+      - id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ steps.app-token.outputs.token || secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  api-image:
+    name: Publish api image
+    needs: release-please
+    if: needs.release-please.outputs.api_release_created == 'true'
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/cd.yml
+    with:
+      app: api
+      version: ${{ needs.release-please.outputs.api_version }}
+
+  web-image:
+    name: Publish web image
+    needs: release-please
+    if: needs.release-please.outputs.web_release_created == 'true'
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/cd.yml
+    with:
+      app: web
+      version: ${{ needs.release-please.outputs.web_version }}

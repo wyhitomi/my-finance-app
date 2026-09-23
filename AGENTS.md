@@ -8,6 +8,8 @@ Gestor financeiro pessoal: múltiplas contas PF/PJ (manuais ou via Open Finance)
 lançamentos manuais e importados, orçamentos, relatórios (consolidado e previsão), i18n pt-BR/en-US, login
 seguro (senha, social, MFA). Detalhes: `openspec/config.yaml` e `docs/`.
 
+Guias: [ADRs e RFCs](docs/guides/adr-and-rfc.md) · [OpenSpec](docs/guides/openspec.md).
+
 ## Regras obrigatórias
 
 1. **Leia `docs/adr/` e `docs/rfc/` antes de propor ou implementar.** Cite os ADRs/RFCs usados.
@@ -18,7 +20,8 @@ seguro (senha, social, MFA). Detalhes: `openspec/config.yaml` e `docs/`.
 5. Respeite as fronteiras dos módulos (ADR-0004); `make check` roda o import-linter.
 6. Dinheiro é `Money`/`Decimal`, nunca `float` (ADR-0007).
 7. Todo texto visível ao usuário usa chaves de tradução em pt-BR **e** en-US (ADR-0008).
-8. Commits no padrão Conventional Commits. Não use `--no-verify`.
+8. Commits no padrão Conventional Commits. Não use `--no-verify`. O tipo define a versão e o CHANGELOG via
+   release-please (ADR-0017): nunca edite versões nem `CHANGELOG.md` à mão.
 
 ## Estrutura
 

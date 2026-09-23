@@ -29,6 +29,8 @@ detalhado nas propostas OpenSpec correspondentes.
 | Previsão | `Forecast` | Projeção de saldo com base em recorrências, parcelas e orçamentos. |
 | Moeda de referência | `ReportingCurrency` | Moeda em que o usuário vê relatórios consolidados (padrão BRL). |
 | Cotação | `ExchangeRate` | Taxa de conversão entre duas moedas numa data, com fonte (ex.: PTAX). |
+| Criptoativo | `Asset` | Ativo de investimento em cripto ou stablecoin, com símbolo, rede e casas decimais próprias (RFC-0007). |
+| Posição | `Holding` | Quantidade de um ativo numa corretora ou carteira do titular. |
 | Detalhes de câmbio | `FxDetails` | Valor original, valor cobrado, taxa efetiva, spread e taxas (IOF, tarifas) de uma operação com câmbio. |
 
 ## Bounded contexts
@@ -63,7 +65,8 @@ detalhado nas propostas OpenSpec correspondentes.
 | `budgeting` | Orçamentos e acompanhamento | Core |
 | `reporting` | Relatórios consolidados e previsão (read models) | Core; candidato a microsserviço |
 | `banking_integration` | Entrada de dados bancários externos: importação OFX/CSV (ADR-0015) e, no futuro, Open Finance (ADR-0013). Camada anticorrupção | Suporte; primeiro candidato a microsserviço |
-| `exchange` | Cotações (PTAX), conversão entre moedas (ADR-0016, RFC-0006) | Suporte |
+| `exchange` | Cotações (PTAX e preços de cripto), conversão entre moedas (ADR-0016, RFC-0006, RFC-0007) | Suporte |
+| `investments` | Criptoativos e stablecoins: carteiras, posições, movimentações (RFC-0007) | Core (pós-núcleo) |
 | `shared_kernel` | `Money`, `Currency` (ISO 4217), `ExchangeRate`, IDs, eventos base | Kernel compartilhado |
 
 ## Perguntas em aberto

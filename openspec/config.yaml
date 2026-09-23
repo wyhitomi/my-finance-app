@@ -31,7 +31,9 @@ context: |
   currency with its own minor units, per-user reporting currency (default BRL),
   explicit conversion with recorded rate/source/date, and FX details (original vs
   charged amount, spread vs reference rate, IOF and fees) per RFC-0006. Rates live
-  in the exchange context.
+  in the exchange context. Crypto and stablecoins (e.g. USDG) are investment
+  assets (quantity x price), never Money currencies; net-worth only, no tax
+  calculation (RFC-0007, investments context).
 
   Conventions: Conventional Commits; TDD (red → green → refactor); every change
   must cite the ADRs/RFCs it relies on; new architectural decisions need a new ADR.

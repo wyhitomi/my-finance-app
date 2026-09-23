@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "include-component-in-tag": true,
+  "separate-pull-requests": false,
+  "changelog-sections": [
+    { "type": "feat", "section": "Funcionalidades" },
+    { "type": "fix", "section": "Correções" },
+    { "type": "perf", "section": "Desempenho" },
+    { "type": "revert", "section": "Reversões" },
+    { "type": "refactor", "section": "Refatorações", "hidden": true },
+    { "type": "docs", "section": "Documentação", "hidden": true },
+    { "type": "spec", "section": "Especificações", "hidden": true },
+    { "type": "test", "section": "Testes", "hidden": true },
+    { "type": "build", "section": "Build", "hidden": true },
+    { "type": "ci", "section": "CI", "hidden": true },
+    { "type": "style", "section": "Estilo", "hidden": true },
+    { "type": "chore", "section": "Manutenção", "hidden": true }
+  ],
+  "packages": {
+    "apps/api": {
+      "release-type": "python",
+      "component": "api",
+      "package-name": "finance-api"
+    },
+    "apps/web": {
+      "release-type": "node",
+      "component": "web",
+      "package-name": "finance-web"
+    }
+  }
+}
