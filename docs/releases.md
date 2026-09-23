@@ -3,6 +3,18 @@
 Decisão e regras: [ADR-0017](adr/0017-release-management-with-release-please.md). API e web têm versões,
 tags (`api-vX.Y.Z`, `web-vX.Y.Z`) e CHANGELOGs independentes.
 
+Arquivos de versão que o release-please atualiza no PR de release:
+
+| App | Arquivos |
+|---|---|
+| API | `apps/api/pyproject.toml` e `apps/api/uv.lock` (versão do pacote `finance-api`, via `extra-files` no `release-please-config.json`) |
+| Web | `apps/web/package.json` |
+
+O `uv.lock` também guarda a versão do próprio projeto. Sem essa entrada, o PR de release deixaria o lockfile
+desatualizado, e o CI falharia no `uv lock --check` e no hook `ruff format` do pre-commit, porque o `uv run`
+reescreve o lockfile. Se um dia o formato do `uv.lock` mudar e o CI acusar divergência de novo, confira o
+`jsonpath` da entrada `extra-files`.
+
 ## Configuração do token
 
 PRs abertos com o `GITHUB_TOKEN` não disparam o CI, então o PR de release ficaria sem checks. O workflow
